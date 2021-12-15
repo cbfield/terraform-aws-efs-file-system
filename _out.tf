@@ -1,3 +1,8 @@
+output "access_points" {
+  description = "Access points created for this file system"
+  value       = aws_efs_access_point.access_point
+}
+
 output "availability_zone_name" {
   description = "The value provided for var.availability_zone_name"
   value       = var.availability_zone_name
@@ -11,6 +16,11 @@ output "creation_token" {
 output "encrypted" {
   description = "The value provided for var.encrypted"
   value       = var.encrypted
+}
+
+output "file_system" {
+  description = "The file system created by this module"
+  value       = aws_efs_file_system.file_system
 }
 
 output "kms_key_id" {

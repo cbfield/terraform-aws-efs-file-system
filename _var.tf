@@ -1,3 +1,25 @@
+variable "access_points" {
+  description = "Access points into this file system"
+  type = list(object({
+    name = string
+    posix_user = optional(object({
+      gid            = string
+      secondary_gids = optional(list(string))
+      uid            = string
+    }))
+    root_directory = optional(object({
+      creation_info = optional(object({
+        owner_gid   = number
+        owner_uid   = number
+        permissions = number
+      }))
+      path = optional(string)
+    }))
+    tags = optional(map(string))
+  }))
+  default = []
+}
+
 variable "availability_zone_name" {
   description = "If creating a one-zone file system, the availability zone to place it in"
   type        = string
