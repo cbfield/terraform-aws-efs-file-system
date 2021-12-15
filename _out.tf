@@ -33,6 +33,16 @@ output "file_system_policy" {
   value       = one(aws_efs_file_system_policy.policy)
 }
 
+output "kms_key" {
+  description = "The KMS key created to encrypt te contents of the file system"
+  value       = one(aws_kms_key.key)
+}
+
+output "kms_key_alias" {
+  description = "The alias of the KMS key created to encrypt te contents of the file system"
+  value       = one(aws_kms_alias.alias)
+}
+
 output "kms_key_id" {
   description = "The value provided for var.kms_key_id"
   value       = var.kms_key_id
@@ -65,7 +75,5 @@ output "lifecycle_policy" {
 
 output "tags" {
   description = "Tags assigned to the file system"
-  value = merge(var.tags, {
-    "Managed By Terraform" = "true"
-  })
+  value       = aws_efs_file_system.file_system.tags
 }

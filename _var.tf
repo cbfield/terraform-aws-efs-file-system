@@ -36,6 +36,12 @@ variable "backup_policy" {
   }
 }
 
+variable "create_kms_key" {
+  description = "If true, a KMS key will be created to encrypt the contents of this file system"
+  type        = bool
+  default     = false
+}
+
 variable "creation_token" {
   description = "A unique token used to ensure idempotent file system creation"
   type        = string
@@ -71,6 +77,7 @@ variable "mount_targets" {
     security_groups        = optional(list(string))
     subnet_id              = string
   }))
+  default = []
 }
 
 variable "performance_mode" {
@@ -105,7 +112,7 @@ variable "lifecycle_policy" {
     transition_to_ia                    = optional(string)
     transition_to_primary_storage_class = optional(string)
   })
-  default = {}
+  default = null
 }
 
 variable "name" {
