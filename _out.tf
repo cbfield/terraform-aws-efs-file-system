@@ -30,12 +30,17 @@ output "file_system" {
 
 output "file_system_policy" {
   description = "The file system resource policy"
-  value       = one(aws_efs_file_system_policy.policy.0)
+  value       = one(aws_efs_file_system_policy.policy)
 }
 
 output "kms_key_id" {
   description = "The value provided for var.kms_key_id"
   value       = var.kms_key_id
+}
+
+output "mount_targets" {
+  description = "Mount targets created for the file system"
+  value       = aws_efs_mount_target.mount_target
 }
 
 output "performance_mode" {

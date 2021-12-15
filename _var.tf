@@ -63,6 +63,15 @@ variable "kms_key_id" {
   default     = null
 }
 
+variable "mount_targets" {
+  description = "Mount targets to create on this file sysytem"
+  type = list(object({
+    ip_address      = optional(string)
+    security_groups = optional(list(string))
+    subnet_id       = string
+  }))
+}
+
 variable "performance_mode" {
   description = "'generalPurpose' or 'maxIO'"
   type        = string
