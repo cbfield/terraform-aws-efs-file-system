@@ -66,9 +66,10 @@ variable "kms_key_id" {
 variable "mount_targets" {
   description = "Mount targets to create on this file sysytem"
   type = list(object({
-    ip_address      = optional(string)
-    security_groups = optional(list(string))
-    subnet_id       = string
+    ip_address             = optional(string)
+    inherit_security_group = optional(bool)
+    security_groups        = optional(list(string))
+    subnet_id              = string
   }))
 }
 
@@ -105,6 +106,27 @@ variable "lifecycle_policy" {
     transition_to_primary_storage_class = optional(string)
   })
   default = {}
+}
+
+variable "name" {
+  description = "A name to assign to the file system"
+  type        = string
+  default     = null
+}
+
+variable "security_group" {
+  description = "Configurations for the security group created for this file system"
+  type = object({
+    create = optional(bool)
+    ingress_rules = optional(list(object({
+      description       = optional(string)
+      cidr_blocks       = optional(list(string))
+      ipv6_cidr_blocks  = optional(list(string))
+      security_group_id = optional(string)
+    })))
+    tags = optional(map(string))
+  })
+  default = null
 }
 
 variable "tags" {

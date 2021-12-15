@@ -16,6 +16,11 @@ resource "aws_efs_file_system" "file_system" {
   }
 
   tags = merge(var.tags, {
-    "Managed By Terraform" = "true"
+    "Managed By Terraform" = "true",
+    "Name"                 = coalesce(var.name, try(random_pet.name.0.id, null))
   })
+}
+
+resource "random_pet" "name" {
+  count = var.name == null ? 1 : 0
 }
