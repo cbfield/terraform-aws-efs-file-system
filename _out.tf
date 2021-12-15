@@ -8,6 +8,11 @@ output "availability_zone_name" {
   value       = var.availability_zone_name
 }
 
+output "backup_policy" {
+  description = "The backup policy for the file system"
+  value       = aws_efs_backup_policy.backup_policy
+}
+
 output "creation_token" {
   description = "The value provided for var.creation_token"
   value       = var.creation_token

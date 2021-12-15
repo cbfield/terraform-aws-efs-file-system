@@ -26,6 +26,16 @@ variable "availability_zone_name" {
   default     = null
 }
 
+variable "backup_policy" {
+  description = "'ENABLED' or 'DISABLED'"
+  type        = string
+  default     = "ENABLED"
+  validation {
+    condition     = contains(["ENABLED", "DISABLED"], var.backup_policy)
+    error_message = "Only the values 'ENABLED' or 'DISABLED' are valid."
+  }
+}
+
 variable "creation_token" {
   description = "A unique token used to ensure idempotent file system creation"
   type        = string
@@ -47,7 +57,11 @@ variable "kms_key_id" {
 variable "performance_mode" {
   description = "'generalPurpose' or 'maxIO'"
   type        = string
-  default     = null
+  default     = "generalPurpose"
+  validation {
+    condition     = contains(["generalPurpose", "maxIO"], var.performance_mode)
+    error_message = "Only the values 'generalPurpose' or 'maxIO' are valid."
+  }
 }
 
 variable "provisioned_throughput_in_mibps" {
@@ -59,7 +73,11 @@ variable "provisioned_throughput_in_mibps" {
 variable "throughput_mode" {
   description = "'bursting' or 'provisioned'"
   type        = string
-  default     = null
+  default     = "bursting"
+  validation {
+    condition     = contains(["bursting", "provisioned"], var.throughput_mode)
+    error_message = "Only the values 'bursting' or 'provisioned' are valid."
+  }
 }
 
 variable "lifecycle_policy" {
