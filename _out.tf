@@ -28,6 +28,11 @@ output "file_system" {
   value       = aws_efs_file_system.file_system
 }
 
+output "file_system_policy" {
+  description = "The file system resource policy"
+  value       = one(aws_efs_file_system_policy.policy.0)
+}
+
 output "kms_key_id" {
   description = "The value provided for var.kms_key_id"
   value       = var.kms_key_id

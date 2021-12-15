@@ -48,6 +48,15 @@ variable "encrypted" {
   default     = true
 }
 
+variable "file_system_policy" {
+  description = "An IAM resource policy to assign to the file system"
+  type = object({
+    bypass_policy_lockout_safety_check = optional(bool)
+    policy                             = string
+  })
+  default = null
+}
+
 variable "kms_key_id" {
   description = "The ARN of a KMS key to use to encrypt the file system. var.encrypted must be true to specify this"
   type        = string
