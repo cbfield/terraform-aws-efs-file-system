@@ -19,7 +19,10 @@ module "my_file_system" {
   # "ENABLED" by default
   backup_policy = "DISABLED"
 
-  file_system_policy = "<a string containing an IAM resource policy for this file system>"
+  file_system_policy = {
+    bypass_policy_lockout_safety_check = false
+    policy                             = ""
+  }
 
   # "generalPurpose" by default
   performance_mode = "maxIO"

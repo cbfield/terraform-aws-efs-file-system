@@ -16,8 +16,7 @@ resource "aws_efs_file_system" "file_system" {
   }
 
   tags = merge(var.tags, {
-    "Managed By Terraform" = "true",
-    "Name"                 = coalesce(var.name, try(random_pet.name.0.id, null))
+    "Name" = coalesce(var.name, try(random_pet.name.0.id, null))
   })
 }
 

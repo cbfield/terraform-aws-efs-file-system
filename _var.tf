@@ -4,7 +4,7 @@ variable "access_points" {
     name = string
     posix_user = optional(object({
       gid            = string
-      secondary_gids = optional(list(string))
+      secondary_gids = optional(list(string), [])
       uid            = string
     }))
     root_directory = optional(object({
@@ -15,7 +15,7 @@ variable "access_points" {
       }))
       path = optional(string)
     }))
-    tags = optional(map(string))
+    tags = optional(map(string), {})
   }))
   default = []
 }
@@ -73,8 +73,8 @@ variable "mount_targets" {
   description = "Mount targets to create on this file sysytem"
   type = list(object({
     ip_address             = optional(string)
-    inherit_security_group = optional(bool)
-    security_groups        = optional(list(string))
+    inherit_security_group = optional(bool, true)
+    security_groups        = optional(list(string), [])
     subnet_id              = string
   }))
   default = []
@@ -124,7 +124,7 @@ variable "name" {
 variable "security_group" {
   description = "Configurations for the security group created for this file system"
   type = object({
-    create = optional(bool)
+    create = optional(bool, true)
     ingress_rules = optional(list(object({
       description       = optional(string)
       cidr_blocks       = optional(list(string))
