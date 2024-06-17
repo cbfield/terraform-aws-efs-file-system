@@ -28,7 +28,6 @@ resource "aws_efs_access_point" "access_point" {
   }
 
   tags = merge(each.value.tags, {
-    "Managed By Terraform" = "true",
-    "Name"                 = each.value.name
+    "Name" = each.value.name
   })
 }

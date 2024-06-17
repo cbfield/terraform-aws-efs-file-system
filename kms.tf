@@ -3,10 +3,6 @@ resource "aws_kms_key" "key" {
 
   description         = "Encrypts the contents of the EFS file system '${coalesce(var.name, try(random_pet.name.0.id, null))}'"
   enable_key_rotation = true
-
-  tags = {
-    "Managed By Terraform" = "true"
-  }
 }
 
 resource "aws_kms_alias" "alias" {

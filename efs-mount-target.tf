@@ -8,10 +8,10 @@ resource "aws_efs_mount_target" "mount_target" {
   subnet_id      = each.value.subnet_id
   ip_address     = each.value.ip_address
 
-  security_groups = coalesce(each.value.inherit_security_group, true) ? concat(
-    coalesce(each.value.security_groups, []),
-    coalesce(try(aws_security_group.security_group.0.id, null), [])
+  security_groups = each.value.inherit_security_group ? concat(
+    each.value.security_groups,
+    try(aws_security_group.security_group.0.id, null)
     ) : (
-    coalesce(each.value.security_groups, [])
+    each.value.security_groups
   )
 }
