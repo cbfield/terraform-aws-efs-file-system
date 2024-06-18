@@ -4,6 +4,9 @@ module "my_file_system" {
   # totally optional, but a random name will be generated if one is not provided
   name = "my-file-system"
 
+  # The default vpc for the current region will be used if this value is omitted
+  vpc_id = "vpc-123123"
+
   # This will make a dedicated key to encrypt the stuff in this file system
   create_kms_key = true
 

@@ -141,3 +141,9 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "vpc_id" {
+  description = "The ID of the VPC in which the EFS will be created. Defaults to default vpc for the current region"
+  type        = string
+  default     = null
+}
