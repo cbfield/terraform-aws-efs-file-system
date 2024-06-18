@@ -10,7 +10,7 @@ resource "aws_efs_mount_target" "mount_target" {
 
   security_groups = each.value.inherit_security_group ? concat(
     each.value.security_groups,
-    try(aws_security_group.security_group.0.id, null)
+    try([aws_security_group.security_group.0.id], null)
     ) : (
     each.value.security_groups
   )
