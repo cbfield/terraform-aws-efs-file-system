@@ -4,6 +4,7 @@ resource "aws_security_group" "security_group" {
   description = "Manages access to the EFS ${aws_efs_file_system.file_system.id} (${lookup(aws_efs_file_system.file_system.tags, "Name")}))"
   name        = coalesce(var.name, try(random_pet.name.0.id, null))
   tags        = try(var.security_group.tags, null)
+  vpc_id      = var.vpc_id
 }
 
 resource "aws_security_group_rule" "ingress" {
